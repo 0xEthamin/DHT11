@@ -13,9 +13,8 @@ A minimalist Arduino library for the DHT11 temperature and humidity sensor. This
 
 ## Hardware Requirements
 
-- Any Arduino-compatible board
+- Arduino or TIVA board
 - DHT11 temperature and humidity sensor
-- 4.7kΩ - 10kΩ pull-up resistor (optional, internal pull-up is used)
 
 ## Installation
 
