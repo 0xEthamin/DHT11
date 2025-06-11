@@ -1,37 +1,59 @@
 # DHT11 Sensor Library
 
-A minimalist Arduino library for the DHT11 temperature and humidity sensor. This library provides a clean and efficient interface to read temperature and humidity data from the DHT11 sensor.
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Platform](https://img.shields.io/badge/platform-Arduino%20%7C%20Energia-blue)]()
+[![Sensor](https://img.shields.io/badge/sensor-DHT11-green)]()
+
+A lightweight and efficient C++ library to read temperature and humidity values from the DHT11 sensor, compatible with both Arduino and Tiva C (Energia).
+
+---
+
+## Overview
+
+This library provides a minimal, robust implementation for interfacing with the DHT11 sensor. It handles timing constraints, data parsing, and error checking with a focus on simplicity and clarity. Ideal for embedded systems or academic projects that require precise and validated readings.
+
+---
 
 ## Features
 
-- 🎯 Focused solely on DHT11 sensor support
-- 💡 Simple and intuitive API
-- ⚡ Efficient implementation
-- 📊 Built-in sensor specifications
-- ✅ Error checking and validation
-- 📝 Comprehensive documentation
+- Clean and minimal implementation
+- Validated readings with checksum support
+- Sensor specifications accessible via API
+- Lightweight footprint (no dynamic memory allocation)
+- Fully compatible with Energia (Tiva C) and Arduino IDE
 
-## Hardware Requirements
+---
 
-- Arduino or TIVA board
-- DHT11 temperature and humidity sensor
+## Hardware Compatibility
+
+- **Microcontrollers**: Arduino, Tiva C TM4C123GXL (via Energia)
+- **Sensor**: DHT11 (Digital Temperature and Humidity Sensor)
+
+---
 
 ## Installation
 
-1. Download this repository
-2. Copy the `DHT.h` and `DHT.cpp` files to your Arduino project
-3. Include the library in your sketch: `#include "DHT.h"`
+1. Download or clone this repository.
+2. Copy the files `DHT.h` and `DHT.cpp` into your Arduino or Energia project.
+3. Include the library at the top of your sketch:
 
-## Wiring
+```cpp
+#include "DHT.h"
+```
 
-Connect your DHT11 sensor to your Arduino board:
-- VCC → 5V
-- DATA → Any digital pin (EX: Tiva PA_2)
-- GND → GND
+---
 
-## Usage
+## Wiring Guide
 
-Here's a basic example of how to use the library:
+| DHT11 Pin | Function      | Connect to                          |
+|-----------|---------------|-------------------------------------|
+| 1 (VCC)   | Power Supply  | 5V                                  |
+| 2 (DATA)  | Data Signal   | Any digital I/O (e.g. PA_2 on Tiva) |
+| 4 (GND)   | Ground        | GND                                 |
+
+---
+
+## Example Usage
 
 ```cpp
 #include "DHT.h"
@@ -95,67 +117,69 @@ void loop()
 }
 ```
 
+---
+
 ## API Reference
 
-### Class `DHT`
+### Class: `DHT`
 
-Main class for interacting with the DHT11 sensor.
+| Method                    | Description                            |
+|---------------------------|----------------------------------------|
+| `DHT(uint8_t pin)`        | Constructor: specify data pin          |
+| `void begin()`            | Initialize the sensor                  |
+| `Reading read()`          | Returns current temperature & humidity |
+| `const Specs& getSpecs()` | Returns sensor specification metadata  |
 
-#### Methods
+### Structs
 
-- `DHT(uint8_t pin)`: Constructor, initializes the sensor on the specified pin
-- `void begin()`: Prepares the sensor for reading
-- `Reading read()`: Reads temperature and humidity from the sensor
-- `const Specs& getSpecs()`: Returns sensor specifications
-
-#### Structures
-
+#### `Reading`
 ```cpp
 struct Reading {
-  float temperature;     // Temperature in Celsius
-  float humidity;        // Humidity in percentage
-  bool isValid;         // Indicates if the reading is valid
-};
-
-struct Specs {
-  const char* name;     // Sensor name
-  float temp_min;       // Minimum temperature (°C)
-  float temp_max;       // Maximum temperature (°C)
-  float temp_res;       // Temperature resolution (°C)
-  float hum_min;        // Minimum humidity (%)
-  float hum_max;        // Maximum humidity (%)
-  float hum_res;        // Humidity resolution (%)
-  uint32_t min_delay;   // Minimum delay between readings (ms)
+  float temperature;
+  float humidity;
+  bool isValid;
 };
 ```
 
-## Sensor Specifications
-
-The DHT11 has the following specifications:
-- Temperature Range: 0°C to 50°C ±2°C
-- Humidity Range: 20% to 80% ±5%
-- Sampling Rate: 1Hz (one reading every second)
-- Resolution: Temperature 1°C, Humidity 1%
+#### `Specs`
+```cpp
+struct Specs {
+  const char* name;
+  float temp_min, temp_max, temp_res;
+  float hum_min, hum_max, hum_res;
+  uint32_t min_delay;
+};
+```
+---
 
 ## Error Handling
 
-The library provides error checking through the `isValid` flag in the `Reading` structure. A reading might be invalid due to:
-- Communication errors
-- Checksum validation failures
-- Reading too frequently (faster than once per second)
+Readings are validated with a checksum. If invalid, the `Reading::isValid` flag will be set to `false`. This may occur due to:
+- Electrical noise or bad wiring
+- Sensor read too frequently (<1s interval)
+- Incomplete or corrupted data signal
 
-## Contributing
+---
 
-Feel free to open issues or submit pull requests to improve this library.
+## Limitations
+
+- Only supports **DHT11** (not DHT22 or AM2302)
+
+---
+
+## Tested Platforms
+
+- Energia 1.8 with Tiva C TM4C123GXL
+
+---
 
 ## License
 
-This library is released under the MIT License. See the LICENSE file for details.
+This project is licensed under the [MIT License](LICENSE).
+
+---
 
 ## Author
 
-0xEthamin
-
-## Acknowledgments
-
-This library is a simplified version optimized specifically for the DHT11 sensor. 
+**0xEthamin**  
+Feel free to open issues or contribute improvements.
