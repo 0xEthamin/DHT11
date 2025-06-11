@@ -1,0 +1,51 @@
+PROJECT_NAME           = "DHT11 Library"
+PROJECT_BRIEF          = "A minimalist DHT11 temperature and humidity sensor library"
+PROJECT_NUMBER         = 1.0
+OUTPUT_DIRECTORY       = docs
+CREATE_SUBDIRS        = NO
+ALLOW_UNICODE_NAMES   = NO
+OUTPUT_LANGUAGE       = English
+BRIEF_MEMBER_DESC     = YES
+REPEAT_BRIEF          = YES
+ALWAYS_DETAILED_SEC   = NO
+INLINE_INHERITED_MEMB = NO
+FULL_PATH_NAMES       = NO
+TAB_SIZE              = 2
+
+# Input files
+INPUT                 = .
+FILE_PATTERNS         = *.cpp *.h
+RECURSIVE             = YES
+EXCLUDE_PATTERNS      = */build/* */test/*
+
+# Output formats
+GENERATE_HTML         = YES
+GENERATE_LATEX        = NO
+HTML_OUTPUT           = html
+HTML_FILE_EXTENSION   = .html
+
+# Customization
+GENERATE_TREEVIEW     = YES
+DISABLE_INDEX         = NO
+EXTRACT_ALL           = YES
+EXTRACT_PRIVATE       = YES
+EXTRACT_STATIC        = YES
+EXTRACT_LOCAL_CLASSES = YES
+
+# Source browsing
+SOURCE_BROWSER        = YES
+INLINE_SOURCES        = YES
+STRIP_CODE_COMMENTS   = NO
+REFERENCED_BY_RELATION= YES
+REFERENCES_RELATION   = YES
+
+# Diagrams and graphs
+HAVE_DOT              = NO
+CLASS_DIAGRAMS        = YES
+HIDE_UNDOC_RELATIONS  = YES
+
+# Preprocessing
+ENABLE_PREPROCESSING  = YES
+MACRO_EXPANSION       = YES
+EXPAND_ONLY_PREDEF   = NO
+PREDEFINED           = ARDUINO=100 
